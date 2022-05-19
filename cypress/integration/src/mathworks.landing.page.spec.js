@@ -17,7 +17,6 @@ describe('Mathworks Landing Page Validation', () => {
           if (response.status == 200) {
             cy.log(response.status)
           } else if (brokenLinkStatusCodes.includes(response.status)) {
-            cy.log("I am here")
             cy.log(response.status)
             throw new Error("Link is broken")
           }
