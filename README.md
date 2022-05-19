@@ -12,7 +12,8 @@ The source `cypress/integration/src/` consists of three specs/scripts.
 - Task 03 : `mathworks.landing.page.spec.js`
 - Task 04 : `matlab.search.spec.js`
 
-After naviagting to `cypress-automation` directory and running `npx cypress open` in termnial should launch the test runner where the tests can be executed.
+Navigate to `cypress-automation` directory
+Run `npx cypress open` in termnial which will launch the test runner
 
 # Observations 
 - For `Task 03` which checks for broken links on mathorks landing page has a LinkedIn URL which returns a 999 status code. This is a non-standard status code which does not permit sending requests. The logic implemented in the `mathworks.landing.page.spec.js` is to get all links on the page and fail upon receving a client error response status code. This was overcome by setting (`failOnStatusCode: false `) and implementing a condition for failure.
