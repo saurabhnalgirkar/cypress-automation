@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Mathworks Landing Page Validation', () => {
+describe('Mathworks Search Page Validation', () => {
 
     beforeEach(() => {
         cy.visit('https://www.mathworks.com/search.html?c%255B%255D=entire_site&c[]=entire_site&q=matlab&page=1')
