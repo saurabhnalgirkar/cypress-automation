@@ -12,7 +12,7 @@ The source `cypress/integration/src/` consists of three specs/scripts.
 - Task 03 : `mathworks.landing.page.spec.js`
 - Task 04 : `matlab.search.spec.js`
 
-After naviagting to the directory and running `npx cypress open` should launch the test runner where the tests can be executed from.
+After naviagting to `cypress-automation` directory and running `npx cypress open` in termnial should launch the test runner where the tests can be executed.
 
 # Documentation
 - https://www.cypress.io/
