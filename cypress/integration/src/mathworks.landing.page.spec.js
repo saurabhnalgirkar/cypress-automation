@@ -6,7 +6,7 @@ describe('Mathworks Landing Page Validation', () => {
   
       cy.visit('https://www.mathworks.com/')
   
-      var brokenLinkStatusCodes = [400, 401,403, 404, 405, 408, 409, 410, 412, 429, 500, 502, 503]
+      var brokenLinkStatusCodes = [400, 401, 403, 404, 405, 408, 409, 410, 412, 429, 500, 502, 503]
   
       cy.get('a[href]').each(link => {
   
