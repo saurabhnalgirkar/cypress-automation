@@ -51,33 +51,32 @@ describe('Mathworks Pricing and Licensing Validation', () => {
       expect(response.body.commercialAnnual.price).to.equal('USD 880')
     })
 
-    // Validate if API call made by UI succeeds
-    cy.intercept('GET', 'https://www.mathworks.com/content/mathworks/www/en/pricing-licensing/jcr:content.product.json?baseCode=ML').as('getPriceForLicenses')
-    cy.visit('https://www.mathworks.com/pricing-licensing.html?prodcode=ML')
-    cy.wait('@getPriceForLicenses').its('response.statusCode').should('equal', 200)
-
     // Validate perpetual license price coming from API and compare it with UI
     cy.get(perpetualLicensePrice).invoke('text')
     .then((perpetualPrice) => {
-      cy.request({
-        method: 'GET',
-        url: 'https://www.mathworks.com/content/mathworks/www/en/pricing-licensing/jcr:content.product.json?baseCode=ML'
-      }).then((response) => {
-        expect(response.status).to.equal(200)
-        expect(response.body.commercial.price).to.equal(perpetualPrice)
-      })
+      cy.intercept('GET', 'https://www.mathworks.com/content/mathworks/www/en/pricing-licensing/jcr:content.product.json?baseCode=ML', ($requset) => {
+        $requset.reply(($response) => {
+          expect($response.statusCode).to.equal(200) // to make sure the request was successful
+          expect($response.body.commercial.price).to.equal(perpetualPrice) // to make sure the price actually matches the response captured 
+        })
+      }).as('getPerpetualPriceForLicenses')
+  
+      cy.visit('https://www.mathworks.com/pricing-licensing.html?prodcode=ML')
+      cy.wait('@getPerpetualPriceForLicenses')
     })
 
     // Validate annual license price and compare it with UI
     cy.get(annualLicensePrice).invoke('text')
     .then((annualPrice) => {
-      cy.request({
-        method: 'GET',
-        url: 'https://www.mathworks.com/content/mathworks/www/en/pricing-licensing/jcr:content.product.json?baseCode=ML'
-      }).then((response) => {
-        expect(response.status).to.equal(200)
-        expect(response.body.commercialAnnual.price).to.equal(annualPrice)
-      })
+      cy.intercept('GET', 'https://www.mathworks.com/content/mathworks/www/en/pricing-licensing/jcr:content.product.json?baseCode=ML', ($requset) => {
+        $requset.reply(($response) => {
+          expect($response.statusCode).to.equal(200) // to make sure the request was successful
+          expect($response.body.commercialAnnual.price).to.equal(annualPrice) // to make sure the price on UI actually matches the response captured 
+        })
+      }).as('getAnnualPriceForLicenses')
+  
+      cy.visit('https://www.mathworks.com/pricing-licensing.html?prodcode=ML')
+      cy.wait('@getAnnualPriceForLicenses')
     })
 
   })
