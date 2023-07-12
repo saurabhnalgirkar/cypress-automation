@@ -26,5 +26,3 @@ For `Task 04b` which validates all breadcrumb_urls is currently failing in `matl
 - https://docs.cypress.io/guides/core-concepts/introduction-to-cypress
 - https://docs.cypress.io/guides/getting-started/writing-your-first-test
 - https://github.com/cypress-io/cypress-example-recipes
-
-- [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=saurabhnalgirkar/cypress-automation)
